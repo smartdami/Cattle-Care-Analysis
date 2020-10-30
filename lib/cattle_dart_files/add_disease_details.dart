@@ -103,7 +103,7 @@ class MyCustomForm extends StatefulWidget {
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
   String dropdownValue;
-  final cattlename = [ "Dog", "Cow","Goat"];
+  final cattlename = [ "Goat", "Dog", "Cow"];
   final DiseaseNameController = TextEditingController();
   final DiseaseDescriptionController = TextEditingController();
   final dbRef = FirebaseDatabase.instance.reference().child("Disease");
