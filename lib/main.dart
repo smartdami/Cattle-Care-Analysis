@@ -1,5 +1,3 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cattle_care_analysis/cattle_dart_files/add_firstaid_detail.dart';
 import 'package:cattle_care_analysis/cattle_dart_files/ret_disease_details.dart';
