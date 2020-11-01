@@ -76,13 +76,14 @@ class _Disease_DetailsState extends State<Disease_Details> {
   void initState() {
     super.initState();
     dbRef = FirebaseDatabase.instance.reference().child("Disease");
+
   }
 
   @override
   Widget build(BuildContext context) {
     return FirebaseAnimatedList(
       shrinkWrap: true,
-      query: dbRef,
+      query: dbRef.orderByChild("CattleType").startAt("D"),
       scrollDirection: Axis.vertical,
       itemBuilder: (BuildContext context, DataSnapshot snapshot,
           Animation<double> animation, int index) {

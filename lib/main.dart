@@ -5,6 +5,7 @@ import 'package:cattle_care_analysis/cattle_dart_files/add_vaccination_details.d
 import 'package:cattle_care_analysis/cattle_dart_files/admin_home.dart';
 import 'package:cattle_care_analysis/cattle_dart_files/add_disease_details.dart';
 
+
 void main() {
   runApp(
     MaterialApp(
