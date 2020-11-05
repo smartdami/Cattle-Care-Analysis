@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-final FirebaseAuth mAuth=FirebaseAuth.instance;
+
 
 class loginpage extends StatefulWidget {
   @override
@@ -13,7 +11,10 @@ class loginpage extends StatefulWidget {
 class _loginpageState extends State<loginpage> {
   TextEditingController emailController=new TextEditingController();
   TextEditingController passwordController=new TextEditingController();
+@override
 
+final mAuth=FirebaseAuth.instance;
+ @override
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +43,9 @@ class _loginpageState extends State<loginpage> {
 
   void signup() async
   {
-  FirebaseUser user;
-    user= await mAuth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+
+    FirebaseUser user;
+   user= await mAuth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
 
   }
 }
