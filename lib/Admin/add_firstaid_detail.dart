@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:http/http.dart';
-
-class adddiseasedetails extends StatelessWidget {
+class addfirstaiddetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +26,7 @@ class adddiseasedetails extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(70, 100, 0, 0),
                   child: Text(
-                    "Add Disease Details",
+                    "Add First-Aid Details",
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,
@@ -73,7 +69,7 @@ class adddiseasedetails extends StatelessWidget {
                                         bottom: BorderSide(
                                             color: Colors.grey[200])),
                                   ),
-                                  child: MyCustomForm(),
+                                  child: addfirstaid(),
                                 ),
                               ],
                             ),
@@ -93,20 +89,20 @@ class adddiseasedetails extends StatelessWidget {
 }
 
 // Create a Form widget.
-class MyCustomForm extends StatefulWidget {
+class addfirstaid extends StatefulWidget {
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  addfirstaidState createState() {
+    return addfirstaidState();
   }
 }
 
-class MyCustomFormState extends State<MyCustomForm> {
+class addfirstaidState extends State<addfirstaid> {
   final _formKey = GlobalKey<FormState>();
   String dropdownValue;
-  final cattlename = [ "Goat", "Dog", "Cow"];
+  final cattlename = ["Goat", "Dog", "Cow","Rabbit","Hen"];
   final DiseaseNameController = TextEditingController();
   final DiseaseDescriptionController = TextEditingController();
-  final dbRef = FirebaseDatabase.instance.reference().child("Disease");
+  final dbRef = FirebaseDatabase.instance.reference().child("FirstAid");
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +143,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             child: TextFormField(
               controller: DiseaseNameController,
               decoration: InputDecoration(
-                labelText: "Disease Name",
+                labelText: "Enter Disease Name",
 
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),

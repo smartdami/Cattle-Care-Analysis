@@ -5,7 +5,7 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:cattle_care_analysis/cattle_dart_files/add_disease_details.dart';
+import 'file:///C:/Flutter/cattle_care_analysis/lib/Admin/add_disease_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:http/http.dart';
-
-class addvaccdetails extends StatelessWidget {
+class adddiseasedetails extends StatefulWidget {
+final String uid;
+  const adddiseasedetails({Key key, this.uid}) : super(key: key);
+  @override
+  _adddiseasedetailsState createState() => _adddiseasedetailsState();
+}
+class _adddiseasedetailsState extends State<adddiseasedetails> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,7 +32,7 @@ class addvaccdetails extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(70, 100, 0, 0),
                   child: Text(
-                    "Add Vaccination Details",
+                    "Add Disease Details",
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.white,
@@ -73,7 +75,7 @@ class addvaccdetails extends StatelessWidget {
                                         bottom: BorderSide(
                                             color: Colors.grey[200])),
                                   ),
-                                  child: addvaccine(),
+                                  child: MyCustomForm(),
                                 ),
                               ],
                             ),
@@ -93,22 +95,28 @@ class addvaccdetails extends StatelessWidget {
 }
 
 // Create a Form widget.
-class addvaccine extends StatefulWidget {
+class MyCustomForm extends StatefulWidget {
+
+  final String uid;
+
+  const MyCustomForm({Key key, this.uid}) : super(key: key);
+
   @override
-  addvaccineState createState() {
-    return addvaccineState();
+  MyCustomFormState createState() {
+    return MyCustomFormState();
   }
 }
 
-class addvaccineState extends State<addvaccine> {
+class MyCustomFormState extends State<MyCustomForm> {
+
+
   final _formKey = GlobalKey<FormState>();
   String dropdownValue;
-  final cattlename = ["Goat", "Dog", "Cow"];
+  final cattlename = [ "Goat", "Dog", "Cow","Rabbit","Hen"];
   final DiseaseNameController = TextEditingController();
-  final VaccineNameController= TextEditingController();
-  final VaccinePeriodController = TextEditingController();
-  final dbRef = FirebaseDatabase.instance.reference().child("VaccinationDetails");
+  final DiseaseDescriptionController = TextEditingController();
 
+  final dbRef = FirebaseDatabase.instance.reference().child("Disease");
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -146,30 +154,9 @@ class addvaccineState extends State<addvaccine> {
             decoration: BoxDecoration(
                 border: Border(bottom: BorderSide(color: Colors.grey[200]))),
             child: TextFormField(
-              controller: VaccineNameController,
-              decoration: InputDecoration(
-                labelText: "Enter Vaccine Name",
-
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Enter Vaccine Name';
-                }
-                return null;
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.grey[200]))),
-            child: TextFormField(
               controller: DiseaseNameController,
               decoration: InputDecoration(
-                labelText: "Enter Disease Name",
+                labelText: "Disease Name",
 
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
@@ -188,16 +175,16 @@ class addvaccineState extends State<addvaccine> {
             decoration: BoxDecoration(
                 border: Border(bottom: BorderSide(color: Colors.grey[200]))),
             child: TextFormField(
-              controller: VaccinePeriodController,
+              controller: DiseaseDescriptionController,
               decoration: InputDecoration(
-                labelText: "Vaccination Period(in months)",
+                labelText: "Enter Description",
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               validator: (value) {
                 if (value.isEmpty) {
-                  return 'Enter Vaccination Period';
+                  return 'Enter Description';
                 }
                 return null;
               },
@@ -213,15 +200,13 @@ class addvaccineState extends State<addvaccine> {
               if (_formKey.currentState.validate()) {
                 dbRef.push().set({
                   "CattleType": dropdownValue,
-                  "VaccineName": VaccineNameController.text,
                   "DiseaseName": DiseaseNameController.text,
-                  "VaccinePeriod": VaccinePeriodController.text,
+                  "DiseaseDescription": DiseaseDescriptionController.text,
                 }).then((_) {
                   Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text('Successfully Added')));
                   DiseaseNameController.clear();
-                  VaccineNameController.clear();
-                  VaccinePeriodController.clear();
+                  DiseaseDescriptionController.clear();
                 }).catchError((onError) {
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text(onError)));
